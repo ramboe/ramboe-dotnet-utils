@@ -6,8 +6,6 @@ Walks and expands **nvim-dap-ui** *Scopes* automatically until a given variable 
 
 ![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Framboe%2FogO6Qgr0Kj.gif?alt=media&token=89c01370-1392-4331-a73f-3884b425d8c8)
 
-TBD: gif
-
 ## Prerequisites
 
 * [`mfussenegger/nvim-dap`](https://github.com/mfussenegger/nvim-dap) configured
