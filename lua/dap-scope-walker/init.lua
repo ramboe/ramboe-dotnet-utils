@@ -3,10 +3,9 @@ local M = {}
 -- Defaults (edit these)
 M._cfg = {
   interval          = 500, -- conservative value here
-  block             = { "Static members", " _", ".Collections.", "DateTime" }, -- your block strings
-  block_insensitive = true,                                                    -- block matching case-insensitive
-  insensitive       = true,                                                    -- target matching case-insensitive
-  start_at_top      = true,
+  block             = { "Static members", " _", ".Collections.", "DateTime" },
+  block_insensitive = true,
+  insensitive       = true,
   center            = true,
   exact             = true,
   highlight         = true

@@ -1,5 +1,5 @@
 # ramboe-dotnet-utils
-Helper functions for dealing with .NET projects
+NeoVim helper functions for dealing with dotnet projects
 
 ## Installation
 
@@ -11,3 +11,8 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
     dependencies = { 'mfussenegger/nvim-dap' }
   },
 ```
+
+From there on follow the READMEs of the individual nvim plugins
+
+* dap-dll-autopicker
+* dap-scope-walker

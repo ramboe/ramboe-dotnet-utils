@@ -2,7 +2,9 @@
 
 # Intro
 
-Walks and expands **nvim-dap-ui** *Scopes* automatically until a given variable name is found. It’s async, fast, and configurable (blocklist, case rules, visual highlight on hit).
+Walks and expands **nvim-dap-ui** *Scopes* automatically until a given variable name is found. 
+
+TBD: gif
 
 ## Prerequisites
 
@@ -26,22 +28,49 @@ You already installed the ramboe-dotnet-utils with lazy, now just call the `setu
 
 ```lua
 -- init.lua
+
 require("dap-scope-walker").setup({
   interval          = 250,
+  -- ...
 });
 ```
 
+## Configuration
+
+```
+{
+  interval          = 500, -- conservative value here
+  block             = { "Static members", " _", ".Collections.", "DateTime" }, 
+  block_insensitive = true,
+  insensitive       = true,
+  center            = true,
+  exact             = true,
+  highlight         = true
+}
+```
+
+Explanation
+
+* `interval` — delay (ms) **after an expansion** so children can render.
+* `block` — substrings; if a line contains any, **don’t expand** it.
+* `block_insensitive` — case-insensitive matching for `block`.
+* `insensitive` — case-insensitive match for the **target name**.
+* `center` — center the found line (`zz`) when target is hit.
+* `exact` — exact name match (else: substring match).
+* `highlight` — select the hit line (Visual-Line) for quick copy/scan.
+
 ## Usage
 
-* Open a debug session so **Scopes** is visible, then run:
+* Open a debug session so [scopes](https://github.com/rcarriga/nvim-dap-ui?tab=readme-ov-file#variable-scopes) is visible, bring the cursor into the scopes window, then run:
 
 ```
 :DapScopeWalk MyProperty
 ```
+
 * The walker will expand through the tree until it finds a line whose **name** is `MyProperty`, select that line (Visual-Line), and center it.
 * To change defaults, pass options in `setup()` (see Installation).
-* Programmatic call:
-
-```lua
-require('dap-scope-walker').DapUI_WalkExpandUntilAsync('MyProperty')
-```
+<!-- * Programmatic call: -->
+<!---->
+<!-- ```lua -->
+<!-- require('dap-scope-walker').DapUI_WalkExpandUntilAsync('MyProperty') -->
+<!-- ``` -->
