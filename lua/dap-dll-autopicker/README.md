@@ -15,16 +15,7 @@ It automatically locates the correct DLL to launch based on the current bufferâ€
 
 ## Installation
 
-With [lazy.nvim](https://github.com/folke/lazy.nvim):
-
-```lua
-  {
-    'ramboe/ramboe-dotnet-utils',
-    dependencies = { 'mfussenegger/nvim-dap' }
-  },
-```
-
-Then assign the `build_dll_path` function to the `program` field inside your csharp dap configuration like so:
+You already installed the ramboe-dotnet-utils with lazy, now assign the `build_dll_path` function to the `program` field inside your csharp dap configuration like so:
 
 ```
 dap.configurations.cs = {

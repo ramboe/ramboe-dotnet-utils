@@ -22,29 +22,14 @@ Walks and expands **nvim-dap-ui** *Scopes* automatically until a given variable 
 
 ## Installation
 
-With [lazy.nvim](https://github.com/folke/lazy.nvim):
+You already installed the ramboe-dotnet-utils with lazy, now just call the `setup()` function, preferably in your `init.lua`
 
 ```lua
-{
-  'ramboe/dap-scope-walker',
-  dependencies = { 'rcarriga/nvim-dap-ui', 'mfussenegger/nvim-dap' },
-  config = function()
-    require('dap_scope_walker').setup({
-      -- sensible defaults; tweak as you like
-      interval = 25,                       -- delay (ms) only after real expansions
-      block = { 'Static members', ' _', '.Collections.', 'DateTime' },
-      block_insensitive = true,            -- case-insensitive block matching
-      insensitive = true,                  -- case-insensitive target matching
-      start_at_top = true,                 -- begin at first line of Scopes
-      center = true,                       -- center the hit line (zz)
-      exact = true,                        -- exact name match (vs substring)
-      visual_on_hit = true,                -- highlight the whole line on hit
-    })
-  end,
-}
+-- init.lua
+require("dap-scope-walker").setup({
+  interval          = 250,
+});
 ```
-
-> Module name for `require(...)`: **`dap_scope_walker`** (underscores for Lua modules).
 
 ## Usage
 
@@ -58,5 +43,5 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 * Programmatic call:
 
 ```lua
-require('dap_scope_walker').DapUI_WalkExpandUntilAsync('MyProperty')
+require('dap-scope-walker').DapUI_WalkExpandUntilAsync('MyProperty')
 ```
