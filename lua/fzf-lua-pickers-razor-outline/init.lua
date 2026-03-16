@@ -4,7 +4,18 @@ local itemswindow = require("fzf-lua-pickers-razor-outline.collect_outline")
 local helpers = require("fzf-lua-pickers-razor-outline.helpers")
 
 -- lines above and below the highlighted line
-local PREVIEW_CONTEXT = 7
+-- local PREVIEW_CONTEXT = 7
+
+local config = {
+  preview_context = 7,
+  preview_window = "up:65%",
+  prompt = "RazorOutline> ",
+}
+
+-- Merge user options into the default plugin config
+function M.setup(opts)
+  config = vim.tbl_deep_extend("force", config, opts or {})
+end
 
 -- Show an error notification inside Neovim
 local function notify_error(msg)
@@ -27,7 +38,7 @@ local function build_preview_cmd(file_path)
       --highlight-line "$line" \
       --line-range "${start}:${stop}" \
       "$2"
-  ]], PREVIEW_CONTEXT)
+  ]], config.preview_context)
 
   return table.concat({
     "bash -c",
@@ -78,9 +89,9 @@ function M.pick()
   local preview_cmd = build_preview_cmd(file_path)
 
   require("fzf-lua").fzf_exec(outline_items, {
-    prompt = "RazorOutline> ",
+    prompt = config.prompt,
     fzf_opts = {
-      ["--preview-window"] = "up:65%",
+      ["--preview-window"] = config.preview_window,
       ["--preview"] = preview_cmd,
     },
     actions = {
