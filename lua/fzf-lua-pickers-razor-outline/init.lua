@@ -3,9 +3,6 @@ local M = {}
 local itemswindow = require("fzf-lua-pickers-razor-outline.collect_outline")
 local helpers = require("fzf-lua-pickers-razor-outline.helpers")
 
--- lines above and below the highlighted line
--- local PREVIEW_CONTEXT = 7
-
 local config = {
   fzflua_razor_outline_preview_context = 7,
   fzflua_razor_outline_preview_window = "up:65%",
@@ -24,6 +21,7 @@ end
 
 -- Build the shell command used by fzf to preview surrounding lines with bat
 local function build_preview_cmd(file_path)
+  
   -- determine bat window content rendering
   local script = string.format([[
     line="${1%%:*}"
