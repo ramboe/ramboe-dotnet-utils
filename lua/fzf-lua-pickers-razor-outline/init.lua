@@ -11,8 +11,6 @@ local function notify_error(msg)
   vim.notify(msg, vim.log.levels.ERROR)
 end
 
-
-
 -- Build the shell command used by fzf to preview surrounding lines with bat
 local function build_preview_cmd(file_path)
   -- determine bat window content rendering
@@ -57,17 +55,17 @@ local function jump_to_entry(bufnr, entry)
   vim.api.nvim_win_set_cursor(target_win, { line, col - 1 })
 end
 
+-- Return the file path of the buffer or nil if the buffer is unnamed
+local function get_current_file(bufnr)
+  local file = vim.api.nvim_buf_get_name(bufnr)
+  if not file or file == "" then
+    return nil
+  end
+  return file
+end
+
 -- Main entry point that builds the Razor outline and launches fzf-lua picker
 function M.pick()
-  -- Return the file path of the buffer or nil if the buffer is unnamed
-  local function get_current_file(bufnr)
-    local file = vim.api.nvim_buf_get_name(bufnr)
-    if not file or file == "" then
-      return nil
-    end
-    return file
-  end
-
   local bufnr = vim.api.nvim_get_current_buf()
   local file_path = get_current_file(bufnr)
 
