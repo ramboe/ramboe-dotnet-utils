@@ -1,7 +1,7 @@
 local M = {}
 
 local itemswindow = require("fzf-lua-pickers-razor-outline.collect_outline")
-
+local helpers = require("fzf-lua-pickers-razor-outline.helpers")
 
 -- lines above and below the highlighted line
 local PREVIEW_CONTEXT = 7
@@ -11,11 +11,6 @@ local function notify_error(msg)
   vim.notify(msg, vim.log.levels.ERROR)
 end
 
--- Extract line and column numbers from an outline entry string
-local function parse_position(entry)
-  local line, col = entry:match("^(%d+):(%d+)")
-  return tonumber(line), tonumber(col)
-end
 
 
 -- Build the shell command used by fzf to preview surrounding lines with bat
@@ -45,7 +40,7 @@ end
 
 -- Move the cursor to the location represented by the selected outline entry
 local function jump_to_entry(bufnr, entry)
-  local line, col = parse_position(entry)
+  local line, col = helpers.parse_position(entry)
   if not line or not col then
     return
   end

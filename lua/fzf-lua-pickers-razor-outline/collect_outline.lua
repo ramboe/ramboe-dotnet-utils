@@ -1,5 +1,7 @@
 local M = {}
 
+local helpers = require("fzf-lua-pickers-razor-outline.helpers")
+
 -- Tree-sitter query used to capture important Razor constructs
 local CAPTURE_QUERY = [[
   (razor_inherits_directive name: (identifier) @inherits)
@@ -17,12 +19,6 @@ end
 -- Remove leading whitespace from a string
 local function trim_left(s)
   return s:gsub("^%s+", "")
-end
-
--- DUPLETTE Extract line and column numbers from an outline entry string
-local function parse_position(entry)
-  local line, col = entry:match("^(%d+):(%d+)")
-  return tonumber(line), tonumber(col)
 end
 
 
@@ -66,8 +62,8 @@ function M.collect_outline_items(bufnr)
   -- Sort outline entries by line and column position
   local function sort_entries(items)
     table.sort(items, function(a, b)
-      local line_a, col_a = parse_position(a)
-      local line_b, col_b = parse_position(b)
+      local line_a, col_a = helpers.parse_position(a)
+      local line_b, col_b = helpers.parse_position(b)
 
       if line_a == line_b then
         return col_a < col_b
