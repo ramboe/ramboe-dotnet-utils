@@ -1,5 +1,31 @@
 local M = {}
 
+-- Tree-sitter query used to capture important Razor constructs
+local CAPTURE_QUERY = [[
+  (razor_inherits_directive name: (identifier) @inherits)
+  (razor_page_directive) @page
+  (razor_if) @if
+  (razor_foreach) @foreach
+  (element) @tag
+]]
+
+-- Read a single line from a buffer by row index
+local function get_line(bufnr, row)
+  return (vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1] or "")
+end
+
+-- Remove leading whitespace from a string
+local function trim_left(s)
+  return s:gsub("^%s+", "")
+end
+
+-- DUPLETTE Extract line and column numbers from an outline entry string
+local function parse_position(entry)
+  local line, col = entry:match("^(%d+):(%d+)")
+  return tonumber(line), tonumber(col)
+end
+
+
 -- Collect outline items from the Razor buffer using Tree-sitter captures
 function M.collect_outline_items(bufnr)
   -- Extract a component tag from a line while ignoring closing or lowercase HTML tags

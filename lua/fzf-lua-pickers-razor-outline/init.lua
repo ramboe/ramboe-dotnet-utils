@@ -2,14 +2,6 @@ local M = {}
 
 local itemswindow = require("fzf-lua-pickers-razor-outline.collect_outline")
 
--- Tree-sitter query used to capture important Razor constructs
-local CAPTURE_QUERY = [[
-  (razor_inherits_directive name: (identifier) @inherits)
-  (razor_page_directive) @page
-  (razor_if) @if
-  (razor_foreach) @foreach
-  (element) @tag
-]]
 
 -- lines above and below the highlighted line
 local PREVIEW_CONTEXT = 7
@@ -17,16 +9,6 @@ local PREVIEW_CONTEXT = 7
 -- Show an error notification inside Neovim
 local function notify_error(msg)
   vim.notify(msg, vim.log.levels.ERROR)
-end
-
--- Read a single line from a buffer by row index
-local function get_line(bufnr, row)
-  return (vim.api.nvim_buf_get_lines(bufnr, row, row + 1, false)[1] or "")
-end
-
--- Remove leading whitespace from a string
-local function trim_left(s)
-  return s:gsub("^%s+", "")
 end
 
 -- Extract line and column numbers from an outline entry string
