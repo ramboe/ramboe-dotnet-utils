@@ -4,6 +4,8 @@ A small Neovim utility that creates a **navigable outline for Razor (`.razor`) f
 
 The picker extracts common Razor constructs (components, directives, and control blocks) and displays them in an interactive list. Selecting an entry jumps the cursor directly to the corresponding location in the file while showing a contextual preview using **bat**.
 
+![](https://firebasestorage.googleapis.com/v0/b/firescript-577a2.appspot.com/o/imgs%2Fapp%2Framboe%2F-qceWqUuNj.png?alt=media&token=8c16c80c-9ff9-4f97-aae6-3d8eab6fafcd)
+
 # Features
 
 * Uses **Tree-sitter** to parse Razor files
