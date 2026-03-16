@@ -1,6 +1,6 @@
 local M = {}
 
-local outlinssss = require("collect_outline")
+local itemswindow = require("fzf-lua-pickers-razor-outline.collect_outline")
 
 -- Tree-sitter query used to capture important Razor constructs
 local CAPTURE_QUERY = [[
@@ -99,7 +99,7 @@ function M.pick()
     return
   end
 
-  local outline_items = outlinssss.collect_outline_items(bufnr)
+  local outline_items = itemswindow.collect_outline_items(bufnr)
   local preview_cmd = build_preview_cmd(file_path)
 
   require("fzf-lua").fzf_exec(outline_items, {
