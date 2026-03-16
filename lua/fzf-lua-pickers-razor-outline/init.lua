@@ -7,9 +7,9 @@ local helpers = require("fzf-lua-pickers-razor-outline.helpers")
 -- local PREVIEW_CONTEXT = 7
 
 local config = {
-  preview_context = 7,
-  preview_window = "up:65%",
-  prompt = "RazorOutline> ",
+  fzflua_razor_outline_preview_context = 7,
+  fzflua_razor_outline_preview_window = "up:65%",
+  fzflua_razor_outline_prompt = "RamboeRazor> ",
 }
 
 -- Merge user options into the default plugin config
@@ -38,7 +38,7 @@ local function build_preview_cmd(file_path)
       --highlight-line "$line" \
       --line-range "${start}:${stop}" \
       "$2"
-  ]], config.preview_context)
+  ]], config.fzflua_razor_outline_preview_context)
 
   return table.concat({
     "bash -c",
@@ -89,9 +89,9 @@ function M.pick()
   local preview_cmd = build_preview_cmd(file_path)
 
   require("fzf-lua").fzf_exec(outline_items, {
-    prompt = config.prompt,
+    prompt = config.fzflua_razor_outline_prompt,
     fzf_opts = {
-      ["--preview-window"] = config.preview_window,
+      ["--preview-window"] = config.fzflua_razor_outline_preview_window,
       ["--preview"] = preview_cmd,
     },
     actions = {
